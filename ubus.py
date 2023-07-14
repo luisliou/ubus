@@ -68,7 +68,7 @@ class Ubus:
         if response.status_code == 200:
             result = response.json()
             if 'result' in result:
-                return result['result']  # Return the ubus call result
+                return result['result'][1]  # Return the ubus call result
             else:
                 print('Call failed')
         else:
