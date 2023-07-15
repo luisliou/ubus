@@ -67,8 +67,10 @@ class Ubus:
         response = requests.post(url, headers=headers, data=json.dumps(data))
         if response.status_code == 200:
             result = response.json()
+            if 'error' in result:
+                return json.dumps(result)
             if 'result' in result:
-                return result['result'][1]  # Return the ubus call result
+                return json.dumps(result['result'][-1])
             else:
                 print('Call failed')
         else:
